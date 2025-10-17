@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sefwi Humjibre SDA Church</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f4f7fc;
+        }
+
+        /* Navigation */
+        nav {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .card h2 {
+            color: #1e3c72;
+            margin-bottom: 1rem;
+        }
+
+        /* Donation Section */
+        .donate-banner {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 2rem;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .donate-banner:hover {
+            transform: translateY(-5px);
+        }
+
+        .donate-banner h2 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .donate-btn {
+            background: white;
+            color: #11998e;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .donate-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Floating Donate Button */
+        .floating-donate {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            z-index: 999;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .floating-donate:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+
+        /* Donation Page */
+        .donation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .church-images {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .church-images img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #1e3c72;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .amount-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .amount-btn {
+            padding: 1rem;
+            background: #f0f0f0;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .amount-btn:hover, .amount-btn.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Admin Login */
+        .login-container {
+            max-width: 400px;
+            margin: 4rem auto;
+        }
+
+        /* Admin Dashboard */
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .logout-btn {
+            background: #e74c3c;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .admin-tab {
+            padding: 1rem 2rem;
+            background: #f0f0f0;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .admin-tab.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .admin-content {
+            display: none;
+        }
+
+        .admin-content.active {
+            display: block;
+        }
+
+        /* News Grid */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .news-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .news-card-content {
+            padding: 1.5rem;
+        }
+
+        .news-card h3 {
+            color: #1e3c72;
+            margin-bottom: 0.5rem;
+        }
+
+        .news-card .date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            cursor: pointer;
+        }
+
+        .gallery-item img, .gallery-item video {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-item .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            pointer-events: none;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .modal-content img, .modal-content video {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 10px;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 3px;
+            background: #667eea;
+        }
+
+        .timeline-item {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3.5rem;
+            top: 0;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #667eea;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+
+        .timeline-item h3 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+ /* Footer */
+        footer {
+            background: #1e3c72;
+            color: white;
+            text-align: center;
+            padding: 40px;
+            margin-top: 60px;
+        }
+
+        footer p {
+            margin: 10px 0;
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: #38ef7d;
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .success-message.active {
+            display: block;
+        }
+
+        .success-message h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive */
+        @media (min-width: 360px) {
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .amount-buttons {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .floating-donate {
+                bottom: 20px;
+                right: 20px;
+                padding: 0.8rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo"><img src="c:\Users\COMPUTER WORLD\OneDrive\Desktop\sda\church\WhatsApp Image 2025-10-10 at 08.47.49_87c75e8b.jpg" width="40px" height="40px" alt="logo"> Sefwi Humjibre SDA</div>
+            <ul class="nav-links">
+                <li><a href="#" onclick="showPage('home')" class="active">Home</a></li>
+                <li><a href="#" onclick="showPage('history')">History</a></li>
+                <li><a href="#" onclick="showPage('news')">News</a></li>
+                <li><a href="#" onclick="showPage('donation')">Donate</a></li>
+                <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+                <li><a href="#" onclick="showPage('admin')">Admin</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Floating Donate Button -->
+    <div class="floating-donate" onclick="showPage('donation')">
+        ❤️ Donate Now
+    </div>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <div class="container">
+            <div class="hero">
+                <h1>Welcome to Sefwi Humjibre SDA Church</h1>
+                <p>The Advent Message To All The World In My Generation</p>
+            </div>
+
+            <div class="donate-banner" onclick="showPage('donation')">
+                <h2>Support Our Mission</h2>
+                <p>Your generosity helps us spread God's love and build His kingdom</p>
+                <button class="donate-btn">Give Now</button>
+            </div>
+
+            <div class="card">
+                <h2>About Us</h2>
+                <p>We are the withness of God's word.</p>
+            </div>
+
+            <div class="card">
+                <h2>Our Mission</h2>
+                <p><strong>To Send The Three Angels' Message </strong><br>Revelation 14:6</p>
+            </div>
+
+            <div class="card">
+                <h2>Service Times</h2>
+               <p><strong>Sabbath:</strong> 8:00 AM - 12:00 PM<br><strong>Youth Day:</strong> Monday 7:30 PM - 8:30 PM<br><strong> Bible Studies:</strong> Sunday 7:30 PM - 8:30 PM<br><strong>Evening Prayers:</strong> Wenesday 7:30 PM - 8:30 PM<br><strong>Music Day:</strong> Thursday 7:30 PM - 8:30 </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- HISTORY PAGE -->
+    <div id="history" class="page">
+        <div class="container">
+            <div class="hero">
+                <h1>Our History</h1>
+                <p>A Legacy of Faith and Service</p>
+            </div>
+
+            <div class="donate-banner" onclick="showPage('donation')">
+                <h2>Help Build Our Legacy</h2>
+                <p>Support the continuation of God's work in Sefwi Humjibre</p>
+                <button class="donate-btn">Contribute Now</button>
+            </div>
+
+            <div class="card">
+                <h2>Our Journey</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                          <h3>🏗️ Founded - 1982</h3>
+                        <p><b><strong>Founders</strong></b><br><strong>Pator:</strong><br>J.Y Ampadu<br><strong>Elders:</strong><li>J.O Baafi</li><li>Thomas Tih</li><li>Smart Authur</li><li>Mr Mensah Darkwa</li></p>
+            </div>
+                    <div class="timeline-item">
+                        <h3>📈 Reformed Again In 1985</h3>
+                         <p><b><strong>Reformers</strong></b><br><strong><strong>Elders:</strong><li>A.W Aseidu</li><li>Bright Agyapong</li><li>John Gyening</li><li>John Obeng</li><li>Banahene Mintha</li><li>Abraham Afful</li><li>Agnes Aseidu</li><li>Comfort Gyapong</li><br><b>The Church was ordained in the Year 1999</b></p>
+            </div>
+                    <div class="timeline-item">
+                        <h3>🌟 Mission</h3>
+                        <p><strong>To Send The Three Angels' Message </strong><br>Revelation 14:6</p>
+            </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Our Heritage</h2>
+                <p>Sefwi Humjibre SDA Church stands as a testament to God's faithfulness and the dedication of generations of believers. We continue to build upon this rich heritage, serving God and our community with the same passion and commitment that characterized our founders.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEWS PAGE -->
+    <div id="news" class="page">
+        <div class="container">
+            <div class="hero">
+                <h1>News & Updates</h1>
+                <p>Stay Connected with Our Church Family</p>
+            </div>
+
+            <div class="donate-banner" onclick="showPage('donation')">
+                <h2>Support Church Activities</h2>
+                <p>Your donations make events and programs possible</p>
+                <button class="donate-btn">Donate Today</button>
+            </div>
+
+            <div class="card">
+                <h2>Latest News</h2>
+                <div id="newsContainer" class="news-grid">
+                    <!-- News will be loaded here -->
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Photo Gallery</h2>
+                <div id="photoGallery" class="gallery-grid">
+                    <!-- Photos will be loaded here -->
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Video Gallery</h2>
+                <div id="videoGallery" class="gallery-grid">
+                    <!-- Videos will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DONATION PAGE -->
+    <div id="donation" class="page">
+        <div class="container">
+            <div class="hero">
+                <h1>Support Our Ministry</h1>
+                <p>Your generosity makes a difference</p>
+            </div>
+
+            <div class="card">
+                <h2>Church Building Pictures</h2>
+                <div class="church-images">
+                    <img src="c:\Users\COMPUTER WORLD\OneDrive\Desktop\sda\church\WhatsApp Image 2025-10-14 at 05.42.34_4aac1229.jpg" alt="Church Building">
+                    <img src="c:\Users\COMPUTER WORLD\OneDrive\Desktop\sda\church\WhatsApp Image 2025-10-14 at 05.42.35_b3e847e6.jpg" alt="Church Interior">
+                    <img src="c:\Users\COMPUTER WORLD\OneDrive\Desktop\sda\church\WhatsApp Image 2025-10-14 at 05.42.35_f35f25e5.jpg" alt="Church Exterior">
+                    <img src="c:\Users\COMPUTER WORLD\OneDrive\Desktop\sda\church\WhatsApp Image 2025-10-14 at 05.42.36_a36a35db.jpg" alt="Church Community">
+                </div>
+            </div>
+
+            <div class="donation-grid">
+                <div class="card">
+                    <h2>Make a Donation</h2>
+                    <form id="donationForm">
+                        <div class="form-group">
+                            <label>Donation Purpose</label>
+                            <select id="donationPurpose" required>
+                                <option value="">Select Purpose</option>
+                                <option value="Building Fund">Building Fund</option>
+                                <option value="Tithe">Tithe</option>
+                                <option value="Offering">Offering</option>
+                                <option value="Mission">Mission Support</option>
+                                <option value="Youth Ministry">Youth Ministry</option>
+                                <option value="Community Outreach">Community Outreach</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Select Amount (GHS)</label>
+                            <div class="amount-buttons">
+                                <div class="amount-btn" onclick="selectAmount(50)">50</div>
+                                <div class="amount-btn" onclick="selectAmount(100)">100</div>
+                                <div class="amount-btn" onclick="selectAmount(200)">200</div>
+                                <div class="amount-btn" onclick="selectAmount(500)">500</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Or Enter Custom Amount (GHS)</label>
+                            <input type="number" id="donationAmount" placeholder="Enter amount" required min="1">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Mobile Money Provider</label>
+                            <select id="mobileProvider" required>
+                                <option value="">Select Provider</option>
+                                <option value="MTN">MTN Mobile Money</option>
+                                <option value="Vodafone">Vodafone Cash</option>
+                                <option value="AirtelTigo">AirtelTigo Money</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Mobile Money Number</label>
+                            <input type="tel" id="mobileNumber" placeholder="e.g., 0244123456" required pattern="[0-9]{10}">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Your Name</label>
+                            <input type="text" id="donorName" placeholder="Enter your name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Email (Optional)</label>
+                            <input type="email" id="donorEmail" placeholder="your@email.com">
+                        </div>
+
+                        <button type="submit" class="submit-btn">Process Donation</button>
+                    </form>
+
+                    <div id="donationSuccess" class="success-message">
+                        <h2>✅ Donation Successful!</h2>
+                        <p id="successMessage"></p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h2>Why Give?</h2>
+                    <p>Your donations support:</p>
+                    <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                        <li>Church building maintenance and improvements</li>
+                        <li>Community outreach programs</li>
+                        <li>Youth and children's ministries</li>
+                        <li>Mission and evangelism activities</li>
+                        <li>Support for those in need</li>
+                        <li>Educational programs</li>
+                    </ul>
+                    <p style="margin-bottom: 30px; color: #666; font-size: 16px;"><strong>HAGGAI 1:2-4</strong><br>"This is what the Lord of Heaven's Armies Say:<br> The people are saying,"The time has not yet come to rebuild the house of the Lord'" Then the Lord sent this message through prophet Hggai: "Why are you living in luxurious houses while my house lies in reins?</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTACT PAGE -->
+    <div id="contact" class="page">
+        <div class="container">
+            <div class="hero">
+                <h1>Contact Us</h1>
+                <p>We'd love to hear from you</p>
+            </div>
+
+            <div class="donate-banner" onclick="showPage('donation')">
+                <h2>Give Back to God's Work</h2>
+                <p>Support our ministry with your generous contribution</p>
+                <button class="donate-btn">Make a Donation</button>
+            </div>
+
+            <div class="card">
+                <h2>Get In Touch</h2>
+                <div class="donation-grid">
+                    <div>
+                        <h3>Contact Information</h3>
+                        <p><strong>Address:</strong><br>Sefwi Humjibre<br>Western North Region, Ghana</p>
+                        <p><strong>Phone:</strong><br>+233 531569456</p>
+                        <p><strong>Email:</strong><br>lilmarvel03@gmail.com</p>
+                        <p><strong>Office Hours:</strong><br>Everyday</p>
+                    </div>
+
+                    <div>
+                        <h3>Send Us a Message</h3>
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" required placeholder="Your name">
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" required placeholder="your@email.com">
+                            </div>
+                            <div class="form-group">
+                                <label>Subject</label>
+                                <input type="text" required placeholder="Message subject">
+                            </div>
+                            <div class="form-group">
+                                <label>Message</label>
+                                <textarea rows="5" required placeholder="Your message"></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADMIN PAGE -->
+    <div id="admin" class="page">
+        <div class="container">
+            <!-- Login Form -->
+            <div id="adminLogin" class="login-container">
+                <div class="card">
+                    <h2>Admin Login</h2>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input type="text" id="username" required placeholder="Enter username">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" id="password" required placeholder="Enter password">
+                        </div>
+                        <button type="submit" class="submit-btn">Login</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Admin Dashboard -->
+            <div id="adminDashboard" style="display: none;">
+                <div class="admin-header">
+                    <h1>Admin Dashboard</h1>
+                    <button class="logout-btn" onclick="logout()">Logout</button>
+                </div>
+
+                <div class="admin-tabs">
+                    <button class="admin-tab active" onclick="showAdminTab('uploadPhoto')">Upload Photos</button>
+                    <button class="admin-tab" onclick="showAdminTab('uploadVideo')">Upload Videos</button>
+                    <button class="admin-tab" onclick="showAdminTab('uploadDoc')">Upload Documents</button>
+                    <button class="admin-tab" onclick="showAdminTab('createNews')">Create News Post</button>
+                </div>
+
+                <!-- Upload Photo -->
+                <div id="uploadPhoto" class="admin-content active">
+                    <div class="card">
+                        <h2>Upload Photos</h2>
+                        <form id="photoUploadForm">
+                            <div class="form-group">
+                                <label>Select Photos</label>
+                                <input type="file" id="photoFiles" accept="image/*" multiple required>
+                            </div>
+                            <div class="form-group">
+                                <label>Category</label>
+                                <select id="photoCategory" required>
+                                    <option value="gallery">Gallery</option>
+                                    <option value="events">Events</option>
+                                    <option value="church">Church Building</option>
+                                    <option value="community">Community</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea id="photoDescription" rows="3" placeholder="Photo description"></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Upload Photos</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Upload Video -->
+                <div id="uploadVideo" class="admin-content">
+                    <div class="card">
+                        <h2>Upload Videos</h2>
+                        <form id="videoUploadForm">
+                            <div class="form-group">
+                                <label>Select Videos</label>
+                                <input type="file" id="videoFiles" accept="video/*" multiple required>
+                            </div>
+                            <div class="form-group">
+                                <label>Video Title</label>
+                                <input type="text" id="videoTitle" required placeholder="Video title">
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea id="videoDescription" rows="3" placeholder="Video description"></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Upload Videos</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Upload Document -->
+                <div id="uploadDoc" class="admin-content">
+                    <div class="card">
+                        <h2>Upload Documents</h2>
+                        <form id="docUploadForm">
+                            <div class="form-group">
+                                <label>Select Documents</label>
+                                <input type="file" id="docFiles" accept=".pdf,.doc,.docx" multiple required>
+                            </div>
+                            <div class="form-group">
+                                <label>Document Title</label>
+                                <input type="text" id="docTitle" required placeholder="Document title">
+                            </div>
+                            <div class="form-group">
+                                <label>Category</label>
+                                <select id="docCategory" required>
+                                    <option value="bulletin">Church Bulletin</option>
+                                    <option value="reports">Reports</option>
+                                    <option value="forms">Forms</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="submit-btn">Upload Documents</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Create News Post -->
+                <div id="createNews" class="admin-content">
+                    <div class="card">
+                        <h2>Create News Post</h2>
+                        <form id="newsPostForm">
+                            <div class="form-group">
+                                <label>News Title</label>
+                                <input type="text" id="newsTitle" required placeholder="Enter news title">
+                            </div>
+                            <div class="form-group">
+                                <label>Featured Image</label>
+                                <input type="file" id="newsImage" accept="image/*" required>
+                            </div>
+                            <div class="form-group">
+                                <label>News Content</label>
+                                <textarea id="newsContent" rows="8" required placeholder="Enter news content"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Author</label>
+                                <input type="text" id="newsAuthor" required placeholder="Author name">
+                            </div>
+                            <button type="submit" class="submit-btn">Publish News</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Media Modal -->
+    <div id="mediaModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <img id="modalImage" style="display: none;">
+            <video id="modalVideo" controls style="display: none;"></video>
+        </div>
+    </div>
+     <footer>
+        <p><strong>Sefwi Humjibre SDA Church</strong></p>
+        <p>&copy; 2025. All rights reserved.</p>
+        <p>A place of faith, community, and spiritual growth</p>
+        <p><strong>DESIGNED BY</strong><br> Godwin Akwabeng(Icon Studio)<br> <strong>Collabration with</strong> <br>Japhet Obeng and Gideon Akwabeng</p>
+    </footer>
+
+    <script>
+        // Admin credentials
+        const adminCredentials = [
+            { username: 'admin', password: 'humjibresda2025' },
+            { username: 'pastor', password: 'humjibresda2025' },
+            { username: 'elder', password: 'humjibresda2025' }
+        ];
+
+        // Storage for media and news
+        let mediaStorage = {
+            photos: [],
+            videos: [],
+            documents: [],
+            news: []
+        };
+
+        // Load stored data
+        function loadStoredData() {
+            const stored = sessionStorage.getItem('churchData');
+            if (stored) {
+                mediaStorage = JSON.parse(stored);
+                displayNews();
+                displayPhotos();
+                displayVideos();
+            }
+        }
+
+        // Save data
+        function saveData() {
+            sessionStorage.setItem('churchData', JSON.stringify(mediaStorage));
+        }
+
+        // Page navigation
+        function showPage(pageName) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageName).classList.add('active');
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            window.scrollTo(0, 0);
+        }
+
+        // Admin login
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const validUser = adminCredentials.find(
+                cred => cred.username === username && cred.password === password
+            );
+
+            if (validUser) {
+                document.getElementById('adminLogin').style.display = 'none';
+                document.getElementById('adminDashboard').style.display = 'block';
+            } else {
+                alert('Invalid username or password!');
+            }
+        });
+
+        function logout() {
+            document.getElementById('adminLogin').style.display = 'block';
+            document.getElementById('adminDashboard').style.display = 'none';
+            document.getElementById('loginForm').reset();
+        }
+
+        function showAdminTab(tabName) {
+            document.querySelectorAll('.admin-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(tabName).classList.add('active');
+
+            document.querySelectorAll('.admin-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // Photo upload
+        document.getElementById('photoUploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const files = document.getElementById('photoFiles').files;
+            const category = document.getElementById('photoCategory').value;
+            const description = document.getElementById('photoDescription').value;
+
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    mediaStorage.photos.push({
+                        src: e.target.result,
+                        category: category,
+                        description: description,
+                        date: new Date().toISOString()
+                    });
+                    saveData();
+                    displayPhotos();
+                };
+                reader.readAsDataURL(file);
+            });
+
+            alert('Photos uploaded successfully!');
+            this.reset();
+        });
+
+        // Video upload
+        document.getElementById('videoUploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const files = document.getElementById('videoFiles').files;
+            const title = document.getElementById('videoTitle').value;
+            const description = document.getElementById('videoDescription').value;
+
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    mediaStorage.videos.push({
+                        src: e.target.result,
+                        title: title,
+                        description: description,
+                        date: new Date().toISOString()
+                    });
+                    saveData();
+                    displayVideos();
+                };
+                reader.readAsDataURL(file);
+            });
+
+            alert('Videos uploaded successfully!');
+            this.reset();
+        });
+
+        // Document upload
+        document.getElementById('docUploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const files = document.getElementById('docFiles').files;
+            const title = document.getElementById('docTitle').value;
+            const category = document.getElementById('docCategory').value;
+
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    mediaStorage.documents.push({
+                        name: file.name,
+                        title: title,
+                        category: category,
+                        date: new Date().toISOString()
+                    });
+                    saveData();
+                };
+                reader.readAsDataURL(file);
+            });
+
+            alert('Documents uploaded successfully!');
+            this.reset();
+        });
+
+        // News post
+        document.getElementById('newsPostForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const title = document.getElementById('newsTitle').value;
+            const content = document.getElementById('newsContent').value;
+            const author = document.getElementById('newsAuthor').value;
+            const imageFile = document.getElementById('newsImage').files[0];
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                mediaStorage.news.push({
+                    title: title,
+                    content: content,
+                    author: author,
+                    image: e.target.result,
+                    date: new Date().toISOString()
+                });
+                saveData();
+                displayNews();
+                alert('News posted successfully!');
+                document.getElementById('newsPostForm').reset();
+            };
+            reader.readAsDataURL(imageFile);
+        });
+
+        // Display news
+        function displayNews() {
+            const container = document.getElementById('newsContainer');
+            if (mediaStorage.news.length === 0) {
+                container.innerHTML = '<p>No news posts yet. Check back soon!</p>';
+                return;
+            }
+
+            container.innerHTML = mediaStorage.news.map(news => {
+                const date = new Date(news.date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                return `
+                    <div class="news-card">
+                        <img src="${news.image}" alt="${news.title}">
+                        <div class="news-card-content">
+                            <h3>${news.title}</h3>
+                            <div class="date">${date} • By ${news.author}</div>
+                            <p>${news.content}</p>
+                        </div>
+                    </div>
+                `;
+            }).reverse().join('');
+        }
+
+        // Display photos
+        function displayPhotos() {
+            const container = document.getElementById('photoGallery');
+            if (mediaStorage.photos.length === 0) {
+                container.innerHTML = '<p>No photos yet.</p>';
+                return;
+            }
+
+            container.innerHTML = mediaStorage.photos.map((photo, index) => `
+                <div class="gallery-item" onclick="openMedia('photo', ${index})">
+                    <img src="${photo.src}" alt="${photo.description}">
+                </div>
+            `).reverse().join('');
+        }
+
+        // Display videos
+        function displayVideos() {
+            const container = document.getElementById('videoGallery');
+            if (mediaStorage.videos.length === 0) {
+                container.innerHTML = '<p>No videos yet.</p>';
+                return;
+            }
+
+            container.innerHTML = mediaStorage.videos.map((video, index) => `
+                <div class="gallery-item" onclick="openMedia('video', ${index})">
+                    <video src="${video.src}"></video>
+                    <div class="play-icon">▶</div>
+                </div>
+            `).reverse().join('');
+        }
+
+        // Media modal
+        function openMedia(type, index) {
+            const modal = document.getElementById('mediaModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalVideo = document.getElementById('modalVideo');
+
+            if (type === 'photo') {
+                modalImage.src = mediaStorage.photos[index].src;
+                modalImage.style.display = 'block';
+                modalVideo.style.display = 'none';
+            } else {
+                modalVideo.src = mediaStorage.videos[index].src;
+                modalVideo.style.display = 'block';
+                modalImage.style.display = 'none';
+            }
+
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('mediaModal');
+            const modalVideo = document.getElementById('modalVideo');
+            modal.classList.remove('active');
+            modalVideo.pause();
+        }
+
+        // Donation form
+        function selectAmount(amount) {
+            document.getElementById('donationAmount').value = amount;
+            document.querySelectorAll('.amount-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            event.target.classList.add('selected');
+        }
+
+        document.getElementById('donationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const purpose = document.getElementById('donationPurpose').value;
+            const amount = document.getElementById('donationAmount').value;
+            const provider = document.getElementById('mobileProvider').value;
+            const mobile = document.getElementById('mobileNumber').value;
+            const name = document.getElementById('donorName').value;
+
+            // Generate reference number
+            const refNumber = 'SDA' + Date.now().toString().slice(-8);
+
+            // Simulate payment processing
+            setTimeout(() => {
+                // Show success message
+                document.getElementById('successMessage').innerHTML = `
+                    <strong>Thank you, ${name}!</strong><br><br>
+                    Your donation of GHS ${amount} for ${purpose} has been processed successfully.<br><br>
+                    <strong>Reference Number:</strong> ${refNumber}<br>
+                    <strong>Payment Method:</strong> ${provider}<br>
+                    <strong>Mobile Number:</strong> ${mobile}<br><br>
+                    An SMS confirmation has been sent to your mobile number.<br><br>
+                    May God bless you abundantly!
+                `;
+                alert('! Please our donation page is not working well, so please you can send your donation on this number "0531569456" with the name Sstephen Akwabeng Addo. THANK YOU VERY MUCH' )
+                document.getElementById('donationSuccess').classList.add('active');
+                document.getElementById('donationForm').style.display = 'none';
+
+                // Simulate SMS sending
+                console.log(`SMS sent to ${mobile}: Thank you ${name} for your donation of GHS ${amount} to Sefwi Humjibre SDA Church. Reference: ${refNumber}. God bless you!`);
+            }, 2000);
+        });
+
+        // Contact form
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+
+        // Initialize
+        loadStoredData();
+    </script>
+</body>
+</html>
